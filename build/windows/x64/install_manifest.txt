@@ -1,0 +1,11 @@
+C:/Job/qlhs/build/windows/x64/runner/Debug/data/icudtl.dat
+C:/Job/qlhs/build/windows/x64/runner/Debug/flutter_windows.dll
+C:/Job/qlhs/build/windows/x64/runner/Debug/data/flutter_assets/AssetManifest.bin
+C:/Job/qlhs/build/windows/x64/runner/Debug/data/flutter_assets/AssetManifest.json
+C:/Job/qlhs/build/windows/x64/runner/Debug/data/flutter_assets/assets/avatar.jpg
+C:/Job/qlhs/build/windows/x64/runner/Debug/data/flutter_assets/assets/img-01.png
+C:/Job/qlhs/build/windows/x64/runner/Debug/data/flutter_assets/FontManifest.json
+C:/Job/qlhs/build/windows/x64/runner/Debug/data/flutter_assets/fonts/MaterialIcons-Regular.otf
+C:/Job/qlhs/build/windows/x64/runner/Debug/data/flutter_assets/kernel_blob.bin
+C:/Job/qlhs/build/windows/x64/runner/Debug/data/flutter_assets/NOTICES.Z
+C:/Job/qlhs/build/windows/x64/runner/Debug/data/flutter_assets/shaders/ink_sparkle.frag
