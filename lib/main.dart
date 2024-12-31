@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:qlhs/views/home_screen.dart';
+import 'package:qlhs/utils/storage.dart';
 import 'package:qlhs/views/login_screen.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  Storage.init();
   runApp(const MainApp());
 }
 

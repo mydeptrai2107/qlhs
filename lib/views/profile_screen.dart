@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:qlhs/models/student.dart';
+import 'package:qlhs/repository/repository.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -8,6 +10,29 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  final repository = Repository();
+  late Student student;
+
+  final nameController = TextEditingController();
+  final addressController = TextEditingController();
+  final phoneNumberController = TextEditingController();
+  final emailController = TextEditingController();
+
+  initData() async {
+    student = await repository.profile();
+    nameController.text = student.tenSv;
+    phoneNumberController.text = student.sdt.toString();
+    addressController.text = student.diaChi;
+    emailController.text = student.email;
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -31,6 +56,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ),
           TextFormField(
+            controller: nameController,
             decoration: InputDecoration(
               hintText: 'Tên sinh viên',
               border: OutlineInputBorder(
@@ -49,8 +75,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ),
           TextFormField(
+            controller: addressController,
             decoration: InputDecoration(
-              hintText: 'Tên sinh viên',
+              hintText: 'Địa chỉ',
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
               ),
@@ -66,6 +93,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ),
           TextFormField(
+            controller: phoneNumberController,
             decoration: InputDecoration(
               hintText: 'Số điện thoại',
               border: OutlineInputBorder(
@@ -83,6 +111,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ),
           TextFormField(
+            controller: emailController,
             decoration: InputDecoration(
               hintText: 'Email',
               border: OutlineInputBorder(
@@ -99,11 +128,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: ElevatedButton(
                   style: ButtonStyle(
                     padding: WidgetStatePropertyAll(
-                      EdgeInsets.symmetric(vertical: 18),
+                      EdgeInsets.symmetric(vertical: 15),
                     ),
                     backgroundColor: WidgetStatePropertyAll(Colors.green),
                   ),
-                  onPressed: () {},
+                  onPressed: () async {
+                    await repository.updateProfile(
+                      nameController.text,
+                      addressController.text,
+                      phoneNumberController.text,
+                      emailController.text,
+                    );
+                  },
                   child: Text(
                     'Cập Nhật',
                     style: TextStyle(color: Colors.white),
@@ -118,7 +154,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: ElevatedButton(
                   style: ButtonStyle(
                     padding: WidgetStatePropertyAll(
-                      EdgeInsets.symmetric(vertical: 18),
+                      EdgeInsets.symmetric(vertical: 15),
                     ),
                     backgroundColor: WidgetStatePropertyAll(Colors.grey),
                   ),

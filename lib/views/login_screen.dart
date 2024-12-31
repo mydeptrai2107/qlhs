@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:qlhs/repository/repository.dart';
 import 'package:qlhs/utils/constant.dart';
+import 'package:qlhs/views/home_screen.dart';
 import 'package:qlhs/widgets/text_field_app.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -12,8 +14,10 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final emailController = TextEditingController();
-  final passController = TextEditingController();
+  final emailController = TextEditingController(text: 'user2');
+  final passController = TextEditingController(text: 'password123');
+  final repository = Repository();
+  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
@@ -47,11 +51,13 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               SizedBox(height: 30),
               TextFieldApp(
+                controller: emailController,
                 hintText: 'Email',
                 prefixIcon: Icon(Icons.email),
               ),
               SizedBox(height: 10),
               TextFieldApp(
+                controller: passController,
                 hintText: 'Password',
                 prefixIcon: Icon(Icons.password),
               ),
@@ -64,7 +70,24 @@ class _LoginScreenState extends State<LoginScreen> {
                         EdgeInsets.symmetric(vertical: 18)),
                     backgroundColor: WidgetStatePropertyAll(Colors.green),
                   ),
-                  onPressed: () {},
+                  onPressed: () async {
+                    try {
+                      setState(() {
+                        isLoading = true;
+                      });
+                      await repository.login(
+                          emailController.text, passController.text);
+                      setState(() {
+                        isLoading = false;
+                      });
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => HomeScreen(),
+                        ),
+                      );
+                    } catch (e) {}
+                  },
                   child: Text(
                     'ĐĂNG NHẬP',
                     style: TextStyle(color: Colors.white),
