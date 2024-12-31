@@ -12,6 +12,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final emailController = TextEditingController();
+  final passController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
@@ -19,7 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
       body: Container(
         height: size.height,
         width: size.width,
-        padding: EdgeInsets.symmetric(vertical: 50, horizontal: 20),
+        padding: EdgeInsets.symmetric(vertical: 100, horizontal: 20),
         decoration: BoxDecoration(
           color: primaryColor,
         ),
