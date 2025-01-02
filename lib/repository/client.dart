@@ -21,7 +21,12 @@ class Client {
         Uri.parse(loginUrl),
         body: jsonEncode(body),
       );
-      return response;
+
+      if (response.statusCode == 200) {
+        return response;
+      } else {
+        throw Exception('Het Han Token');
+      }
     } catch (e) {
       rethrow;
     }
@@ -38,7 +43,11 @@ class Client {
         },
         Uri.parse(loginUrl),
       );
-      return response;
+      if (response.statusCode == 200) {
+        return response;
+      } else {
+        throw Exception('Het Han Token');
+      }
     } catch (e) {
       rethrow;
     }

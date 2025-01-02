@@ -1,7 +1,10 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:qlhs/repository/repository.dart';
 import 'package:qlhs/utils/constant.dart';
 import 'package:qlhs/views/home_screen.dart';
+import 'package:qlhs/views/register_screen.dart';
+import 'package:qlhs/widgets/dialog_service.dart';
 import 'package:qlhs/widgets/text_field_app.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -38,7 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             children: [
               Text(
-                'Quản Trị Viên',
+                'Đăng Nhập',
                 style: TextStyle(
                   fontWeight: FontWeight.w900,
                   fontSize: 23,
@@ -67,19 +70,16 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: ElevatedButton(
                   style: ButtonStyle(
                     padding: WidgetStatePropertyAll(
-                        EdgeInsets.symmetric(vertical: 18)),
+                      EdgeInsets.symmetric(vertical: 18),
+                    ),
                     backgroundColor: WidgetStatePropertyAll(Colors.green),
                   ),
                   onPressed: () async {
                     try {
-                      setState(() {
-                        isLoading = true;
-                      });
+                      DialogService.showLoading(context);
                       await repository.login(
                           emailController.text, passController.text);
-                      setState(() {
-                        isLoading = false;
-                      });
+                      Navigator.pop(context);
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
@@ -93,7 +93,36 @@ class _LoginScreenState extends State<LoginScreen> {
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
-              )
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              RichText(
+                text: TextSpan(
+                  text: 'Chưa có tài khoản? ',
+                  style: TextStyle(
+                    color: Colors.grey,
+                  ),
+                  children: [
+                    TextSpan(
+                      text: 'Đăng ký ngay',
+                      style: TextStyle(
+                        color: primaryColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => RegisterScreen(),
+                            ),
+                          );
+                        },
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),

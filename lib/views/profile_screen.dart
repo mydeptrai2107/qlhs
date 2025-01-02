@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:qlhs/models/student.dart';
 import 'package:qlhs/repository/repository.dart';
+import 'package:qlhs/widgets/dialog_service.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -18,13 +19,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final phoneNumberController = TextEditingController();
   final emailController = TextEditingController();
 
+  String statusUpdaye = '';
+  bool isLoading = false;
+
   initData() async {
     student = await repository.profile();
     nameController.text = student.tenSv;
     phoneNumberController.text = student.sdt.toString();
     addressController.text = student.diaChi;
     emailController.text = student.email;
-    setState(() {});
   }
 
   @override
@@ -120,7 +123,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ),
           SizedBox(height: 10),
-
+          Center(
+            child: Text(
+              statusUpdaye,
+              style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.green),
+            ),
+          ),
+          SizedBox(height: 10),
           Row(
             children: [
               Expanded(
@@ -133,12 +145,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     backgroundColor: WidgetStatePropertyAll(Colors.green),
                   ),
                   onPressed: () async {
-                    await repository.updateProfile(
-                      nameController.text,
-                      addressController.text,
-                      phoneNumberController.text,
-                      emailController.text,
-                    );
+                    try {
+                      DialogService.showLoading(context);
+                      await repository.updateProfile(
+                        nameController.text,
+                        addressController.text,
+                        phoneNumberController.text,
+                        emailController.text,
+                      );
+                      Navigator.pop(context);
+                      setState(() {
+                        statusUpdaye = 'Cập nhật thành công!';
+                      });
+                    } catch (e) {
+                      statusUpdaye = e.toString();
+                    }
                   },
                   child: Text(
                     'Cập Nhật',
