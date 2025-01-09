@@ -4,8 +4,6 @@
 
 import 'dart:convert';
 
-import 'package:qlhs/models/semester.dart';
-
 List<Score> scoreFromJson(String str) =>
     List<Score>.from(json.decode(str).map((x) => Score.fromJson(x)));
 
@@ -23,7 +21,7 @@ class Score {
   Monhoc monhoc;
   Tinchi tinchi;
   Theloai theloai;
-  HocKy hocky;
+  Hocky hocky;
   Namhoc namhoc;
   dynamic lop;
 
@@ -54,7 +52,7 @@ class Score {
         monhoc: Monhoc.fromJson(json["monhoc"]),
         tinchi: Tinchi.fromJson(json["tinchi"]),
         theloai: Theloai.fromJson(json["theloai"]),
-        hocky: HocKy.fromJson(json["hocky"]),
+        hocky: Hocky.fromJson(json["hocky"]),
         namhoc: Namhoc.fromJson(json["namhoc"]),
         lop: json["lop"],
       );
@@ -76,11 +74,31 @@ class Score {
       };
 }
 
+class Hocky {
+  String maHk;
+  dynamic tenHk;
+
+  Hocky({
+    required this.maHk,
+    required this.tenHk,
+  });
+
+  factory Hocky.fromJson(Map<String, dynamic> json) => Hocky(
+        maHk: json["maHK"],
+        tenHk: json["tenHK"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "maHK": maHk,
+        "tenHK": tenHk,
+      };
+}
+
 class Giangvien {
   String maGv;
   dynamic tenGv;
   dynamic diaChi;
-  int sdt;
+  dynamic sdt;
   dynamic email;
 
   Giangvien({
@@ -160,7 +178,7 @@ class Sinhvien {
   int maSv;
   dynamic tenSv;
   dynamic diaChi;
-  int sdt;
+  dynamic sdt;
   dynamic email;
   dynamic lop;
 
@@ -214,7 +232,7 @@ class Theloai {
 
 class Tinchi {
   String maTc;
-  int soTc;
+  dynamic soTc;
 
   Tinchi({
     required this.maTc,
