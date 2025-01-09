@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:qlhs/models/khoa.dart';
-import 'package:qlhs/repository/repository_student.dart';
+import 'package:qlhs/repository/repository_admin.dart';
 
-class DepartmentScreen extends StatefulWidget {
-  const DepartmentScreen({super.key});
+class AdminDepartmentScreen extends StatefulWidget {
+  const AdminDepartmentScreen({super.key});
 
   @override
-  State<DepartmentScreen> createState() => _DepartmentScreenState();
+  State<AdminDepartmentScreen> createState() => _AdminDepartmentScreenState();
 }
 
-class _DepartmentScreenState extends State<DepartmentScreen> {
+class _AdminDepartmentScreenState extends State<AdminDepartmentScreen> {
   List<Khoa> departments = [];
-  final repository = RepositoryStudent();
+  final repository = RepositoryAdmin();
   init() async {
     departments = await repository.getDepartment();
     setState(() {});

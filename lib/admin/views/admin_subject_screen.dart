@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:qlhs/models/subject.dart';
-import 'package:qlhs/repository/repository_student.dart';
+import 'package:qlhs/repository/repository_admin.dart';
 
-class SubjectScreen extends StatefulWidget {
-  const SubjectScreen({super.key});
+class AdminSubjectScreen extends StatefulWidget {
+  const AdminSubjectScreen({super.key});
 
   @override
-  State<SubjectScreen> createState() => _SubjectScreenState();
+  State<AdminSubjectScreen> createState() => _AdminSubjectScreenState();
 }
 
-class _SubjectScreenState extends State<SubjectScreen> {
+class _AdminSubjectScreenState extends State<AdminSubjectScreen> {
   List<Subject> subjects = [];
-  final repository = RepositoryStudent();
+  final repository = RepositoryAdmin();
   init() async {
     subjects = await repository.getSubject();
     setState(() {});

@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:qlhs/models/semester.dart';
-import 'package:qlhs/repository/repository_student.dart';
+import 'package:qlhs/repository/repository_admin.dart';
 
-class SemesterScreen extends StatefulWidget {
-  const SemesterScreen({super.key});
+class AdminHocKyScreen extends StatefulWidget {
+  const AdminHocKyScreen({super.key});
 
   @override
-  State<SemesterScreen> createState() => _SemesterScreenState();
+  State<AdminHocKyScreen> createState() => _AdminHocKyScreenState();
 }
 
-class _SemesterScreenState extends State<SemesterScreen> {
+class _AdminHocKyScreenState extends State<AdminHocKyScreen> {
   List<HocKy> semesters = [];
-  final repository = RepositoryStudent();
+  final repository = RepositoryAdmin();
   init() async {
-    semesters = await repository.getSemester();
+    semesters = await repository.getHocKy();
     setState(() {});
   }
 

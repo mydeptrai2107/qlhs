@@ -1,8 +1,8 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:qlhs/repository/repository.dart';
+import 'package:qlhs/repository/repository_student.dart';
 import 'package:qlhs/utils/constant.dart';
-import 'package:qlhs/views/home_screen.dart';
-import 'package:qlhs/widgets/dialog_service.dart';
+import 'package:qlhs/views/login_screen.dart';
 import 'package:qlhs/widgets/text_field_app.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -18,7 +18,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final emailController = TextEditingController();
   final passController = TextEditingController();
   final nameController = TextEditingController();
-  final repository = Repository();
+  final repository = RepositoryStudent();
   bool isLoading = false;
   @override
   Widget build(BuildContext context) {
@@ -80,21 +80,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     backgroundColor: WidgetStatePropertyAll(Colors.green),
                   ),
                   onPressed: () async {
-                    try {
-                      DialogService.showLoading(context);
-                      await repository.login(
-                          emailController.text, passController.text);
-                      Navigator.pop(context);
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => HomeScreen(),
-                        ),
-                      );
-                    } catch (e) {}
+                    await repository.register(
+                      context,
+                      nameController.text,
+                      passController.text,
+                      emailController.text,
+                    );
                   },
                   child: Text(
-                    'ĐĂNG NHẬP',
+                    'ĐĂNG Ký',
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
@@ -104,13 +98,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
               RichText(
                 text: TextSpan(
-                  text: 'Chưa có tài khoản? ',
+                  text: 'Đã có tài khoản? ',
                   style: TextStyle(
                     color: Colors.grey,
                   ),
                   children: [
                     TextSpan(
-                      text: 'Đăng ký ngay',
+                      text: 'Đăng nhập ngay',
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => LoginScreen(),
+                            ),
+                          );
+                        },
                       style: TextStyle(
                         color: primaryColor,
                         fontWeight: FontWeight.bold,

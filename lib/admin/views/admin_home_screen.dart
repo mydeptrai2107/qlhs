@@ -1,48 +1,48 @@
 import 'package:flutter/material.dart';
+import 'package:qlhs/admin/views/admin_category_screen.dart';
+import 'package:qlhs/admin/views/admin_class_screen.dart';
+import 'package:qlhs/admin/views/admin_department_screen.dart';
+import 'package:qlhs/admin/views/admin_hocky_screen.dart';
+import 'package:qlhs/admin/views/admin_list_student.dart';
+import 'package:qlhs/admin/views/admin_list_teacher.dart';
+import 'package:qlhs/admin/views/admin_list_timetable.dart';
+import 'package:qlhs/admin/views/admin_nien_khoa_screen.dart';
+import 'package:qlhs/admin/views/admin_score_screen.dart';
+import 'package:qlhs/admin/views/admin_subject_screen.dart';
+import 'package:qlhs/admin/views/admin_tinchi_screen.dart';
+import 'package:qlhs/admin/views/school_year_screen.dart';
 import 'package:qlhs/utils/constant.dart';
 import 'package:qlhs/utils/storage.dart';
-import 'package:qlhs/views/list_timetable.dart';
-import 'package:qlhs/views/category_screen.dart';
-import 'package:qlhs/views/class_screen.dart';
-import 'package:qlhs/views/department_screen.dart';
 import 'package:qlhs/views/login_screen.dart';
-import 'package:qlhs/views/nien_khoa_screen.dart';
-import 'package:qlhs/views/period_screen.dart';
-import 'package:qlhs/views/profile_screen.dart';
-import 'package:qlhs/views/school_year_screen.dart';
-import 'package:qlhs/views/score_screen.dart';
-import 'package:qlhs/views/semester_screen.dart';
-import 'package:qlhs/views/subject_screen.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({
+class AdminHomeScreen extends StatefulWidget {
+  const AdminHomeScreen({
     super.key,
-    required this.userName,
   });
-  final String userName;
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<AdminHomeScreen> createState() => _AdminHomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _AdminHomeScreenState extends State<AdminHomeScreen> {
   int _selectedIndex = 0;
   int _inforOption = -1;
   int _subjectOption = -1;
   int _khoaOption = -1;
   String title = 'Trang Chủ';
   List<Widget> contents = [
-    ProfileScreen(),
-    ScoreScreen(),
-    ListTimeTable(),
-    SemesterScreen(),
-    SchoolYearScreen(),
-    NienKhoaScreen(),
-    SubjectScreen(),
-    CategoryScreen(),
-    PeriodScreen(),
-    DepartmentScreen(),
-    ClassScreen(),
+    AdminListStudent(),
+    AdminListTeacher(),
+    AdminScoreScreen(),
+    AdminListTimeTable(),
+    AdminHocKyScreen(),
+    AdminSchoolYearScreen(),
+    AdminNienKhoaScreen(),
+    AdminSubjectScreen(),
+    AdminCategoryScreen(),
+    AdminTinChiScreen(),
+    AdminDepartmentScreen(),
+    AdminClassScreen(),
   ];
 
   @override
@@ -85,24 +85,31 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                       ),
-                      Text(
-                        '   ${widget.userName}',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      )
                     ],
                   )
                 ],
               ),
             ),
             ListTile(
-              leading: const Icon(Icons.account_circle),
-              title: const Text('Profile'),
+              leading: const Icon(Icons.grid_on_rounded),
+              title: const Text('Danh sách học sinh'),
               onTap: () {
                 setState(() {
                   _selectedIndex = 0;
+                  _khoaOption = -1;
+                  _inforOption = -1;
+                  _subjectOption = -1;
+                  title = 'Profile';
+                  Navigator.pop(context);
+                });
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.grid_on_rounded),
+              title: const Text('Danh sách giảng viên'),
+              onTap: () {
+                setState(() {
+                  _selectedIndex = 1;
                   _khoaOption = -1;
                   _inforOption = -1;
                   _subjectOption = -1;
@@ -116,7 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
               title: const Text('Xem Điểm'),
               onTap: () {
                 setState(() {
-                  _selectedIndex = 1;
+                  _selectedIndex = 2;
                   _khoaOption = -1;
                   _inforOption = -1;
                   _subjectOption = -1;
@@ -130,11 +137,11 @@ class _HomeScreenState extends State<HomeScreen> {
               title: const Text('Thời Khóa Biểu'),
               onTap: () {
                 setState(() {
-                  _selectedIndex = 2;
+                  _selectedIndex = 3;
                   _khoaOption = -1;
                   _inforOption = -1;
                   _subjectOption = -1;
-                  title = 'Bảng Điểm';
+                  title = 'Thời Khóa Biểu';
                   Navigator.pop(context);
                 });
               },
@@ -178,7 +185,7 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           RadioListTile<int>(
             title: Text('Học Kỳ'),
-            value: 3,
+            value: 4,
             groupValue: _inforOption,
             onChanged: (value) {
               setState(() {
@@ -193,7 +200,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           RadioListTile<int>(
             title: Text('Năm Học'),
-            value: 4,
+            value: 5,
             groupValue: _inforOption,
             onChanged: (value) {
               setState(() {
@@ -208,7 +215,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           RadioListTile<int>(
             title: Text('Niên Khóa'),
-            value: 5,
+            value: 6,
             groupValue: _inforOption,
             onChanged: (value) {
               setState(() {
@@ -235,7 +242,7 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           RadioListTile<int>(
             title: Text('Môn Học'),
-            value: 6,
+            value: 7,
             groupValue: _subjectOption,
             onChanged: (value) {
               setState(() {
@@ -250,7 +257,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           RadioListTile<int>(
             title: Text('Thể Loại'),
-            value: 7,
+            value: 8,
             groupValue: _subjectOption,
             onChanged: (value) {
               setState(() {
@@ -265,7 +272,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           RadioListTile<int>(
             title: Text('Tiết'),
-            value: 8,
+            value: 9,
             groupValue: _subjectOption,
             onChanged: (value) {
               setState(() {
@@ -292,7 +299,7 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           RadioListTile<int>(
             title: Text('Khoa'),
-            value: 9,
+            value: 10,
             groupValue: _khoaOption,
             onChanged: (value) {
               setState(() {
@@ -307,7 +314,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           RadioListTile<int>(
             title: Text('Lớp'),
-            value: 10,
+            value: 11,
             groupValue: _khoaOption,
             onChanged: (value) {
               setState(() {

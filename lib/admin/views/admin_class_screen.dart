@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:qlhs/models/class.dart';
-import 'package:qlhs/repository/repository_student.dart';
+import 'package:qlhs/repository/repository_admin.dart';
 
-class ClassScreen extends StatefulWidget {
-  const ClassScreen({super.key});
+class AdminClassScreen extends StatefulWidget {
+  const AdminClassScreen({super.key});
 
   @override
-  State<ClassScreen> createState() => _ClassScreenState();
+  State<AdminClassScreen> createState() => _AdminClassScreenState();
 }
 
-class _ClassScreenState extends State<ClassScreen> {
+class _AdminClassScreenState extends State<AdminClassScreen> {
   List<Lop> classs = [];
-  final repository = RepositoryStudent();
+  final repository = RepositoryAdmin();
   init() async {
     classs = await repository.getClass();
     setState(() {});

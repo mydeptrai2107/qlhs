@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:qlhs/models/semester.dart';
+
 List<Score> scoreFromJson(String str) =>
     List<Score>.from(json.decode(str).map((x) => Score.fromJson(x)));
 
@@ -21,7 +23,7 @@ class Score {
   Monhoc monhoc;
   Tinchi tinchi;
   Theloai theloai;
-  Hocky hocky;
+  HocKy hocky;
   Namhoc namhoc;
   dynamic lop;
 
@@ -52,7 +54,7 @@ class Score {
         monhoc: Monhoc.fromJson(json["monhoc"]),
         tinchi: Tinchi.fromJson(json["tinchi"]),
         theloai: Theloai.fromJson(json["theloai"]),
-        hocky: Hocky.fromJson(json["hocky"]),
+        hocky: HocKy.fromJson(json["hocky"]),
         namhoc: Namhoc.fromJson(json["namhoc"]),
         lop: json["lop"],
       );
@@ -103,26 +105,6 @@ class Giangvien {
         "diaChi": diaChi,
         "sdt": sdt,
         "email": email,
-      };
-}
-
-class Hocky {
-  String maHk;
-  dynamic tenHk;
-
-  Hocky({
-    required this.maHk,
-    required this.tenHk,
-  });
-
-  factory Hocky.fromJson(Map<String, dynamic> json) => Hocky(
-        maHk: json["maHK"],
-        tenHk: json["tenHK"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "maHK": maHk,
-        "tenHK": tenHk,
       };
 }
 

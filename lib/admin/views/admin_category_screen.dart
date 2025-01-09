@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:qlhs/models/score.dart';
-import 'package:qlhs/repository/repository_student.dart';
+import 'package:qlhs/repository/repository_admin.dart';
 
-class CategoryScreen extends StatefulWidget {
-  const CategoryScreen({super.key});
+class AdminCategoryScreen extends StatefulWidget {
+  const AdminCategoryScreen({super.key});
 
   @override
-  State<CategoryScreen> createState() => _CategoryScreenState();
+  State<AdminCategoryScreen> createState() => _AdminCategoryScreenState();
 }
 
-class _CategoryScreenState extends State<CategoryScreen> {
+class _AdminCategoryScreenState extends State<AdminCategoryScreen> {
   List<Theloai> theloai = [];
-  final repository = RepositoryStudent();
+  final repository = RepositoryAdmin();
   init() async {
-    theloai = await repository.getCategory();
+    theloai = await repository.getTheLoai();
     setState(() {});
   }
 

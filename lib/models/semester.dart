@@ -4,26 +4,26 @@
 
 import 'dart:convert';
 
-Semester semesterFromJson(String str) => Semester.fromJson(json.decode(str));
+HocKy semesterFromJson(String str) => HocKy.fromJson(json.decode(str));
 
-String semesterToJson(Semester data) => json.encode(data.toJson());
+String semesterToJson(HocKy data) => json.encode(data.toJson());
 
-class Semester {
-    String maHk;
-    String tenHk;
+class HocKy {
+  String maHk;
+  String tenHk;
 
-    Semester({
-        required this.maHk,
-        required this.tenHk,
-    });
+  HocKy({
+    required this.maHk,
+    required this.tenHk,
+  });
 
-    factory Semester.fromJson(Map<String, dynamic> json) => Semester(
+  factory HocKy.fromJson(Map<String, dynamic> json) => HocKy(
         maHk: json["maHK"],
         tenHk: json["tenHK"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "maHK": maHk,
         "tenHK": tenHk,
-    };
+      };
 }

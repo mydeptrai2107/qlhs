@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:qlhs/repository/repository_student.dart';
+import 'package:qlhs/repository/repository_admin.dart';
 
-class NienKhoaScreen extends StatefulWidget {
-  const NienKhoaScreen({super.key});
+class AdminNienKhoaScreen extends StatefulWidget {
+  const AdminNienKhoaScreen({super.key});
 
   @override
-  State<NienKhoaScreen> createState() => _NienKhoaScreenState();
+  State<AdminNienKhoaScreen> createState() => _AdminNienKhoaScreenState();
 }
 
-class _NienKhoaScreenState extends State<NienKhoaScreen> {
+class _AdminNienKhoaScreenState extends State<AdminNienKhoaScreen> {
   List<Map<String, dynamic>> nienKhoa = [];
-  final repository = RepositoryStudent();
+  final repository = RepositoryAdmin();
   init() async {
     nienKhoa = await repository.getNienKhoa();
     setState(() {});

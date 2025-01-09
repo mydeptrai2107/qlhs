@@ -1,6 +1,9 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:qlhs/repository/repository.dart';
+import 'package:qlhs/admin/views/admin_home_screen.dart';
+import 'package:qlhs/repository/repository_student.dart';
 import 'package:qlhs/utils/constant.dart';
 import 'package:qlhs/views/home_screen.dart';
 import 'package:qlhs/views/register_screen.dart';
@@ -17,9 +20,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final emailController = TextEditingController(text: 'user2');
-  final passController = TextEditingController(text: 'password123');
-  final repository = Repository();
+  final usernameController = TextEditingController(text: 'admin');
+  final passController = TextEditingController(text: '123');
+  final repository = RepositoryStudent();
   bool isLoading = false;
   @override
   Widget build(BuildContext context) {
@@ -54,8 +57,8 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               SizedBox(height: 30),
               TextFieldApp(
-                controller: emailController,
-                hintText: 'Email',
+                controller: usernameController,
+                hintText: 'UserName',
                 prefixIcon: Icon(Icons.email),
               ),
               SizedBox(height: 10),
@@ -77,16 +80,21 @@ class _LoginScreenState extends State<LoginScreen> {
                   onPressed: () async {
                     try {
                       DialogService.showLoading(context);
-                      await repository.login(
-                          emailController.text, passController.text);
+                      String role = await repository.login(
+                          usernameController.text, passController.text);
                       Navigator.pop(context);
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => HomeScreen(),
+                          builder: (context) => role == "1" ? AdminHomeScreen() : HomeScreen(
+                            userName: usernameController.text,
+                          ),
                         ),
                       );
-                    } catch (e) {}
+                    } on FormatException catch (e) {
+                      Navigator.pop(context);
+                      DialogService.showDialogFail(context, e.message);
+                    }
                   },
                   child: Text(
                     'ĐĂNG NHẬP',

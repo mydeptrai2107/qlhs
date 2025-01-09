@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:qlhs/repository/repository_student.dart';
+import 'package:qlhs/models/namhoc.dart';
+import 'package:qlhs/repository/repository_admin.dart';
 
-class SchoolYearScreen extends StatefulWidget {
-  const SchoolYearScreen({super.key});
+class AdminSchoolYearScreen extends StatefulWidget {
+  const AdminSchoolYearScreen({super.key});
 
   @override
-  State<SchoolYearScreen> createState() => _SchoolYearScreenState();
+  State<AdminSchoolYearScreen> createState() => _AdminSchoolYearScreenState();
 }
 
-class _SchoolYearScreenState extends State<SchoolYearScreen> {
-  List<Map<String, dynamic>> schoolYears = [];
-  final repository = RepositoryStudent();
+class _AdminSchoolYearScreenState extends State<AdminSchoolYearScreen> {
+  List<NamHoc> schoolYears = [];
+  final repository = RepositoryAdmin();
   init() async {
     schoolYears = await repository.getSchoolYear();
     setState(() {});
@@ -38,10 +39,10 @@ class _SchoolYearScreenState extends State<SchoolYearScreen> {
               DataRow(
                 cells: [
                   DataCell(
-                    Text(schoolYears[i]['maNH']),
+                    Text(schoolYears[i].maNh),
                   ),
                   DataCell(
-                    Text(schoolYears[i]['tenNH']),
+                    Text(schoolYears[i].tenNh),
                   ),
                 ],
               ),

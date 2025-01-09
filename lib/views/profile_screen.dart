@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qlhs/models/student.dart';
-import 'package:qlhs/repository/repository.dart';
+import 'package:qlhs/repository/repository_student.dart';
 import 'package:qlhs/widgets/dialog_service.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -11,7 +11,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  final repository = Repository();
+  final repository = RepositoryStudent();
   late Student student;
 
   final nameController = TextEditingController();

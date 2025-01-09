@@ -22,11 +22,28 @@ class Client {
         body: jsonEncode(body),
       );
 
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200 || response.statusCode == 201) {
         return response;
       } else {
-        throw Exception('Het Han Token');
+        throw Exception(jsonDecode(response.body)['message']);
       }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<http.Response> postNoToken(
+      String url, Map<String, dynamic> body) async {
+    String loginUrl = '$baseUrl$url';
+
+    try {
+      final response = await http.post(
+        headers: {'Content-Type': 'application/json'},
+        Uri.parse(loginUrl),
+        body: jsonEncode(body),
+      );
+
+      return response;
     } catch (e) {
       rethrow;
     }

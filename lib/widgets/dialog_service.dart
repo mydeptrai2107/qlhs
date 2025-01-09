@@ -17,4 +17,58 @@ class DialogService {
       },
     );
   }
+
+  static void showDialogSuccess(BuildContext context, String title) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Dialog(
+          child: Container(
+            padding: EdgeInsets.all(15),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  Icons.check_circle,
+                  color: Colors.green,
+                  size: 40,
+                ),
+                Text(title),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  static void showDialogFail(BuildContext context, String title) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Dialog(
+          child: Container(
+            padding: EdgeInsets.all(15),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  Icons.cancel,
+                  color: Colors.red,
+                  size: 40,
+                ),
+                Text(title),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
 }

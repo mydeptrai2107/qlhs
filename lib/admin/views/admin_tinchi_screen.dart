@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:qlhs/models/score.dart';
-import 'package:qlhs/repository/repository_student.dart';
+import 'package:qlhs/repository/repository_admin.dart';
 
-class CategoryScreen extends StatefulWidget {
-  const CategoryScreen({super.key});
+class AdminTinChiScreen extends StatefulWidget {
+  const AdminTinChiScreen({super.key});
 
   @override
-  State<CategoryScreen> createState() => _CategoryScreenState();
+  State<AdminTinChiScreen> createState() => _AdminTinChiScreenState();
 }
 
-class _CategoryScreenState extends State<CategoryScreen> {
-  List<Theloai> theloai = [];
-  final repository = RepositoryStudent();
+class _AdminTinChiScreenState extends State<AdminTinChiScreen> {
+  List<Tinchi> periods = [];
+  final repository = RepositoryAdmin();
   init() async {
-    theloai = await repository.getCategory();
+    periods = await repository.getTinChi();
     setState(() {});
   }
 
@@ -31,18 +31,18 @@ class _CategoryScreenState extends State<CategoryScreen> {
         scrollDirection: Axis.horizontal,
         child: DataTable(
           columns: [
-            DataColumn(label: Text('Mã Thể Loại')),
-            DataColumn(label: Text('Thể Loại')),
+            DataColumn(label: Text('Mã Tiết Học')),
+            DataColumn(label: Text('Số Tiết Học')),
           ],
           rows: [
-            for (int i = 0; i < theloai.length; i++)
+            for (int i = 0; i < periods.length; i++)
               DataRow(
                 cells: [
                   DataCell(
-                    Text(theloai[i].maTl),
+                    Text(periods[i].maTc),
                   ),
                   DataCell(
-                    Text(theloai[i].tenTl),
+                    Text(periods[i].soTc.toString()),
                   ),
                 ],
               ),

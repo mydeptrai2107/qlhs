@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qlhs/models/score.dart';
-import 'package:qlhs/repository/repository.dart';
+import 'package:qlhs/repository/repository_student.dart';
 
 class PeriodScreen extends StatefulWidget {
   const PeriodScreen({super.key});
@@ -11,7 +11,7 @@ class PeriodScreen extends StatefulWidget {
 
 class _PeriodScreenState extends State<PeriodScreen> {
   List<Tinchi> periods = [];
-  final repository = Repository();
+  final repository = RepositoryStudent();
   init() async {
     periods = await repository.getPeriod();
     setState(() {});
